@@ -1,0 +1,371 @@
+/* === WALLPAPER FULLSCREEN === */
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+  background-color: black;
+  color: white;
+  background-image: url("https://media-hosting.imagekit.io/2540b555dc8541f3/1000034377.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  transition: background-color 1s ease; /* Transição para tela final */
+}
+
+/* === BOOT SCREEN MINICODE === */
+#boot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  color: lime;
+  font-family: monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  z-index: 99999;
+  animation: fadeBoot 3s forwards;
+}
+
+@keyframes fadeBoot {
+  0%   { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { opacity: 0; display: none; }
+}
+
+/* === CRT + GLITCH EFFECT === */
+#crt-overlay {
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 0, 0.03),
+    rgba(0, 255, 0, 0.03) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  z-index: 999;
+  mix-blend-mode: overlay;
+  animation: glitch 0.2s infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(1px, -1px); }
+  50% { transform: translate(-1px, 1px); }
+  75% { transform: translate(1px, 1px); }
+  100% { transform: translate(0, -1px); }
+}
+
+.glitch {
+  animation: glitch-text 0.5s steps(2, end) infinite;
+}
+
+@keyframes glitch-text {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-1px, 2px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-2px, 1px); }
+  80% { transform: translate(1px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* === MENU INICIAL === */
+#menu {
+  position: absolute;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  padding: 40px 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s ease-out 3s forwards; /* Animação de fade in após o boot */
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#menu h1 {
+  font-size: 48px;
+  color: red;
+  text-shadow: 0 0 10px white;
+  margin-bottom: 30px;
+}
+
+#creditos {
+  margin-top: 20px;
+  font-size: 16px;
+  color: gray;
+  display: none;
+}
+
+button {
+  font-size: 20px;
+  background: black;
+  color: white;
+  border: 2px solid red;
+  padding: 10px 30px;
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: darkred;
+}
+
+/* === INTRODUÇÃO TEXTO === */
+#introducao {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: black;
+  color: red;
+  font-size: 18px;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 20;
+}
+
+#textoIntro p {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeText 2s ease-in-out forwards;
+  margin-bottom: 20px;
+}
+
+#textoIntro p:nth-child(1) { animation-delay: 0s; }
+#textoIntro p:nth-child(2) { animation-delay: 3s; }
+#textoIntro p:nth-child(3) { animation-delay: 6s; }
+#textoIntro p:nth-child(4) { animation-delay: 9s; }
+#textoIntro p:nth-child(5) { animation-delay: 12s; }
+#textoIntro p:nth-child(6) { animation-delay: 15s; }
+
+@keyframes fadeText {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === DESKTOP === */
+#desktop {
+  display: none;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.5s ease-out 21s forwards; /* Animação de fade in após a intro */
+}
+
+/* === ÍCONES === */
+.icon {
+  width: 80px;
+  text-align: center;
+  cursor: move;
+  user-select: none;
+  position: relative;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.icon:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.icon img {
+  width: 64px;
+  height: 64px;
+}
+
+.icon span {
+  display: block;
+  margin-top: 5px;
+  font-size: 13px;
+  color: white;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.icon-escondido {
+  display: none !important; /* Inicialmente escondido */
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.icon-aparecendo {
+  display: inline-block !important;
+  animation: aparecerIcone 0.5s ease-out forwards;
+}
+
+@keyframes aparecerIcone {
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* === JANELAS XP-LIKE === */
+.window {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 340px;
+  background: #fff;
+  border: 2px solid #C0C0C0;
+  display: none;
+  box-shadow: 3px 3px 8px #000;
+  z-index: 5;
+  font-family: Tahoma, sans-serif;
+  color: black;
+  border-radius: 2px;
+  animation: abrirJanela 0.2s ease-out;
+}
+
+.window-oculta {
+  display: none !important;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.window-aparecendo {
+  display: block !important;
+  animation: aparecerJanela 0.3s ease-out forwards;
+}
+
+@keyframes aparecerJanela {
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes abrirJanela {
+  from { opacity: 0.8; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.title-bar {
+  background: #0a4cc4;
+  color: white;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: move;
+}
+
+.title-bar button {
+  background: #c00;
+  color: white;
+  border: none;
+  width: 22px;
+  height: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+.title-bar button:hover {
+  background-color: darkred;
+}
+
+.window-content {
+  padding: 10px;
+  background: #f0f0f0;
+  color: black;
+  font-family: monospace;
+}
+
+/* === CAMPOS DE TEXTO / INPUT === */
+textarea {
+  width: 100%;
+  background: black;
+  color: lime;
+  border: 1px solid lime;
+  padding: 5px;
+  resize: none;
+  font-family: monospace;
+}
+
+input {
+  margin-top: 5px;
+  padding: 5px;
+  font-family: monospace;
+  background: black;
+  color: white;
+  border: 1px solid lime;
+}
+
+.feedback {
+  color: #00cc00;
+  margin-top: 5px;
+}
+
+/* === ELEMENTOS ESPECÍFICOS === */
+#log-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  margin-left: 5px;
+  animation: pulsar 1s infinite alternate;
+  visibility: hidden; /* Inicialmente escondido */
+}
+
+.notification-ativo {
+  visibility: visible !important;
+}
+
+@keyframes pulsar {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.5; transform: scale(1.2); }
+}
+
+#botao-fonte-bin {
+  display: none;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background-color: #333;
+  color: #eee;
+  border: 1px solid #555;
+  cursor: pointer;
+  font-family: monospace;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+#botao-fonte-bin.mostrar {
+  display: block !important;
+  animation: aparecerBotao 0.3s ease-out forwards;
+}
+
+@keyframes aparecerBotao {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#tela-final {
+  background-color: black; /* Garante que a tela final cubra tudo */
+  opacity: 0;
+  animation: fadeInTelaFinal 1s ease-in forwards;
+}
+
+@keyframes fadeInTelaFinal {
+  to { opacity: 1; }
+}

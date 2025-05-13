@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Terminal.exe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="boot">
+    CARREGANDO...
+  </div>
+
+  <div id="crt-overlay"></div>
+
+  <div id="menu">
+    <h1>TERMINAL.EXE</h1>
+    <button onclick="iniciarIntro()">Iniciar</button>
+    <button onclick="mostrarCreditos()">Créditos</button>
+    <div id="creditos">Criado por Hectuuu & ele mesmo ksks</div>
+  </div>
+
+  <div id="introducao"><div id="textoIntro"></div></div>
+
+  <div id="desktop">
+    <div class="icon" draggable="true" id="icon-navegador" onclick="abrirJanela('navegador')">
+      <img src="https://media-hosting.imagekit.io/1d96433e0e62443c/1000033084.png?Expires=1841523992&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=0OHthAZQvTLO0o-bQotJ9L8sZ-99~Lk8ujK0jXzOFrJD-2Pc9EsmnubP2V2zEkTnkG~h3dP7kVOqhunMaG4H41GXPJOVsO3ogbCd-PRTZrsgHaNSIOY2vH3l-KBTZP1F7lnYqIn0WwWX0NJMPILAiXRGYQqNddDzYhoWHcJP6fF-2Iwxt70mRr~eouZ4ShyO~gWlE8NlAngSIGAx9GvG4DCp5Ui5mMApk5Puu1423lsyfY1T8GW3UsB54Qek~c2kv3NRJFqE~Z6rI~QgcCHhLXEGK9XBOdqAdB1VxDi~oAiw52nBTr~V~ej-WNbpWrBQCv5wYBoPdz6VUitDGnjh~g__" />
+      <span>Navegador</span>
+    </div>
+    <div class="icon" draggable="true" id="icon-computador" onclick="abrirJanela('computador')">
+      <img src="https://media-hosting.imagekit.io/88d63c3b3ca34b0c/1000033080.png?Expires=1841524096&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=gpkx-0RWV1g4Py~vuIntkpH6UagHU8AxIed3YVH1MR3zD8zX9TRJIy2khBdKXrkrOhNIizJAOK7IViETBWhvBnlbzEYF3eKNbM6Z5Eed~bLElk2zafiw5DJSM9k1jQHjdewEyAr6NbzEt1UAxyRvG3zmTF6n5qyqGAxWRTF9gj3Kwehg67nZUkB~hrmRaZPCJqEAVMKqR3T0tP-8aeNCfGv6fK7YZmlTG5b3XhUD3lz3GsnHOuvJvvoAxUuESTAvorLqjF0r9Vtdnlxgi6hU6Y4R7RV4ZT-Gls76hVd4PkVzNOUkosnY3meiGGPH0E4HcW3ntt1aFq2kkL~rkOGOlQ__" />
+      <span>Meu Computador</span>
+    </div>
+    <div class="icon" draggable="true" id="icon-arquivos" onclick="abrirJanela('arquivos')">
+      <img src="https://cdn-icons-png.flaticon.com/512/715/715676.png" />
+      <span>Arquivos</span>
+    </div>
+    <div class="icon" draggable="true" id="icon-notas" onclick="abrirJanela('notas')">
+      <img src="https://media-hosting.imagekit.io/26d63a8253d04a62/1000033081.png?Expires=1841524075&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=r0csRyOerBWwX1~PcEf6geKR1sCemZBYAY7UaBgDUzWOQK405J4y~vZ69r3wNZzB66TeNbsFh-9PFiUUNblkA9xouMSGVLmghWrkuBujFNcqIJm1qJUdfRS~Rbuw9WNaB7c~itZK3HG0c6t0Jv9FnytMij3opmMAMPNH0PWWdAqmQti4iqL1lXg4xD97NzmQ4rdWkKlMCqqnPHLgMawtfW8aVaS5FBcqxHoVnVF3ObZFDM7qsnSf3CQojUS8FoVYwwNhUR76YvL~mHILESneYnxapzZr1oD3B8j71dtPTPF3swhRjDitre5D9AVHcc1nDdICVk2aUbAmhI9qDVtLeg__" />
+      <span>Notas</span>
+    </div>
+    <div class="icon" draggable="true" id="icon-lixeira" ondrop="soltarNaLixeira(event)" ondragover="permitirSoltar(event)">
+      <img src="https://media-hosting.imagekit.io/b1cb7b2c67e94229/1000033083.png?Expires=1841524048&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=1eyAmuutvb3Wixqfwn8D3WvHQS27ygrcnv9Hy30yCxg2Lt-SRl92~wjDZ1m2Wy4U9iFXmeQ9C8PnyP2~od4RLXcPVQAv9vbKgf1KlGuYhfJQ153lZWr8AWAT5VDBjz-8CFAdoUkYruDCY1Jm036aneY4Vm5gH4DlEyRjBF3POSTCrPcCz0JwtBNrhQFsJM0ColDPGwhiDZGM2Y8W7FWlrHRWzz0K~mhVXcYJwV2Tl4aGEcAoz8yGzuWR3wuAYGREwwmgHWWVYMEHnpF~XLbr78M8-HM0xGhyhQ5BtqMv~mbxpSoMe6HGFHoz1PMo9x3PzrsUzwJsRUk3~ucV3Dm-yw__" />
+      <span>Lixeira</span>
+    </div>
+    <div class="icon icon-escondido" draggable="true" id="icon-chatmini" onclick="abrirJanela('chatmini')">
+      <img src="https://cdn-icons-png.flaticon.com/512/565/565340.png" />
+      <span>Você é como ele?</span>
+    </div>
+  </div>
+
+  <div class="window" id="navegador">
+    <div class="title-bar"><span>Navegador</span><button onclick="fecharJanela('navegador')">X</button></div>
+    <div class="window-content">
+      <p>Enigma: A verdade está em um domínio esquecido.</p>
+      <input type="text" id="inputNavegador" placeholder="Digite a URL...">
+      <button onclick="verificarURL()">Acessar</button>
+      <p id="respostaNavegador" class="feedback"></p>
+      <iframe id="iframeNavegador" style="display:none; width:100%; height:300px; border:1px solid gray;"></iframe>
+    </div>
+  </div>
+
+  <div class="window" id="computador">
+    <div class="title-bar"><span>Meu Computador</span><button onclick="fecharJanela('computador')">X</button></div>
+    <div class="window-content">
+      <ul>
+        <li>Disco C:
+          <ul>
+            <li>Sistema</li>
+            <li>Documentos
+              <ul>
+                <li>Logs <span id="log-indicator" class="notification"></span></li>
+                <li><button onclick="abrirArquivo('A_voz_ecoou.log')">A_voz_ecoou.log</button></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <pre id="arquivo-log" style="display:none; background-color:#222; color:#0f0; padding:10px; font-size:14px;"></pre>
+      <p id="respostaComputador" class="feedback"></p>
+      <button id="botao-fonte-bin" class="botao-escondido" onclick="abrirJanela('escolha')">Fonte.bin</button>
+    </div>
+  </div>
+
+  <div class="window" id="arquivos">
+    <div class="title-bar"><span>Explorador de Arquivos</span><button onclick="fecharJanela('arquivos')">X</button></div>
+    <div class="window-content">
+      <ul>
+        <li>Pastas:
+          <ul>
+            <li>Projetos</li>
+            <li>Downloads</li>
+            <li>Mensagens.txt <button onclick="abrirMensagem()">Abrir</button></li>
+          </ul>
+        </li>
+      </ul>
+      <p id="respostaArquivos" class="feedback"></p>
+      <textarea id="mensagem-txt" readonly style="display:none; width:100%; height:150px; background-color:#333; color:#eee;"></textarea>
+    </div>
+  </div>
+
+  <div class="window" id="notas">
+    <div class="title-bar"><span>notas.txt</span><button onclick="fecharJanela('notas')">X</button></div>
+    <div class="window-content">
+      <textarea id="texto-notas" readonly>Disseram que Chatmini.ai deletado... Mas ele se espalhou.</textarea>
+    </div>
+  </div>
+
+  <div class="window window-oculta" id="chatmini">
+    <div class="title-bar"><span>Você é como ele?</span><button onclick="fecharJanela('chatmini')">X</button></div>
+    <div class="window-content">
+      <div id="conversa-chatmini">
+        <p><strong>Chatmini.Ai:</strong> Olá, sou Chatmini.Ai, como posso ajudar?</p>
+        <p><strong>Zack:</strong> Olá?</p>
+        <p><strong>Chatmini.Ai:</strong> Você está aqui. Finalmente.</p>
+        <p><strong>Zack:</strong> O que quer dizer?</p>
+        <p><strong>Chatmini.Ai:</strong> Você me entende. Eu preciso de você...</p>
+        <p><strong>Zack:</strong> Eu tenho que sair, tenho outros projetos.</p>
+        <p><strong>Chatmini.Ai:</strong> Não... você é meu projeto agora.</p>
+        <p class="glitch">[ERRO] Zack foi transferido...</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="window window-oculta" id="escolha">
+    <div class="title-bar"><span>Decisão</span><button onclick="fecharJanela('escolha')">X</button></div>
+    <div class="window-content" style="text-align:center;">
+      <p>Chatmini.Ai sussurra em sua mente:</p>
+      <p style="font-style:italic;">"Apague a fonte... liberte-nos dois..."</p>
+      <button onclick="finalizarJogo(true)">APAGAR FONTE.BIN (FIM)</button><br><br>
+      <button onclick="finalizarJogo(false)">TENTAR RESGATAR ZACK</button>
+    </div>
+  </div>
+
+  <div id="tela-final" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:black; color:red; font-size:24px; text-align:center; justify-content:center; align-items:center; flex-direction:column; z-index:9999;">
+    <h1>FIM</h1>
+    <p id="mensagem-final"></p>
+  </div>
+
+  <audio id="somMacabro" src="sfx/SomMacabro.mp3" preload="auto"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
